@@ -59,6 +59,19 @@ async function run() {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) }
       const options = { upsert: true }
+      const updateToy = req.body;
+      const Toy = {
+        $set: {
+          category: updateToy.category,
+          price: updateToy.price,
+          photo: updateToy.photo,
+          name: updateToy.name,
+          email:updateToy.email
+        }
+      }
+
+      const result = await ToyCollection.updateOne(filter, Toy, options);
+      res.send(result);
     })
     // created Toy
 
