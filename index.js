@@ -52,7 +52,10 @@ async function run() {
       const result = await ToyCollection.findOne(query);
       res.send(result);
     })
-
+    app.get('/totalToys', async (req, res) => {
+      const result = await ToyCollection.estimatedDocumentCount();
+      res.send({totalToy: result })
+    })
 
 
     app.put('/:id', async (req, res) => {
@@ -66,7 +69,7 @@ async function run() {
           price: updateToy.price,
           photo: updateToy.photo,
           name: updateToy.name,
-          email:updateToy.email
+          email: updateToy.email
         }
       }
 
